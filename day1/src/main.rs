@@ -9,8 +9,13 @@ pub fn part_a(input: &str) -> i64 {
 
     let mut increases: i64 = 0;
 
-    for i in 1..c.len() {
-        if c[i] > c[i-1] {
+    // for i in 1..c.len() {
+    //     if c[i] > c[i-1] {
+    //         increases += 1;
+    //     }
+    // }
+    for window in c.windows(2) {
+        if window[1] > window[0] {
             increases += 1;
         }
     }
