@@ -1,10 +1,10 @@
-use std::{collections::HashMap, cmp::min, cmp::max};
+use std::{collections::HashMap};
 
 fn main () {
     // dbg!(part_a(include_str!("example.txt")));
     // dbg!(part_a(include_str!("input.txt")));
     dbg!(part_b(include_str!("example.txt")));
-    dbg!(part_b(include_str!("input.txt")));
+    // dbg!(part_b(include_str!("input.txt")));
 }
 
 fn add_line_point(positions: &mut HashMap<(u32,u32), u32>, point: (u32, u32)) {
@@ -41,18 +41,18 @@ pub fn part_a(input: &str) -> u32 {
             // x line
             if line[1] == line[3] {
                 for x in
-                min(line[0], line[2])
-                ..
-                (max(line[0], line[2]) + 1)
+                line[0].min(line[2])
+                ..=
+                line[0].max(line[2])
                 { add_line_point(&mut positions, (x, line[1])); }
             }
 
             // y line
             else if line[0] == line[2] {
                 for y in
-                min(line[1], line[3])
-                ..
-                (max(line[1],  line[3]) + 1)
+                line[1].min(line[3])
+                ..=
+                line[1].max(line[3])
                 { add_line_point(&mut positions, (line[0], y)); }
             }
         }
@@ -67,15 +67,14 @@ pub fn part_a(input: &str) -> u32 {
         println!();
     }
     
-    let mut count = 0;
-    for (_key, value) in positions {
-        if value > 1 { count += 1; }
-    }
+    // let mut count = 0;
+    // for (_key, value) in positions {
+    //     if value > 1 { count += 1; }
+    // }
 
-    // dbg!(count);
-    // dbg!(boards);
+    // count
 
-    count
+    positions.values().filter(|c| **c >= 2).count() as u32
 }
 
 pub fn part_b(input: &str) -> u32 {
