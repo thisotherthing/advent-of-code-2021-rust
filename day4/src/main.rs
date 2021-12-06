@@ -20,7 +20,11 @@ fn get_board(input: &str) -> Board {
 
     let long_input = input.trim().replace('\n', " ");
 
-    let numbers: Vec<u32> = long_input.split(' ').filter(|s| !s.is_empty()).map(|s| s.parse::<u32>().unwrap()).collect::<Vec<u32>>();
+    let numbers: Vec<u32> =
+        long_input.split(' ')
+        .filter(|s| !s.is_empty())
+        .map(|s| s.parse::<u32>().unwrap())
+        .collect::<Vec<u32>>();
 
     let num_numbers = numbers.len();
 
