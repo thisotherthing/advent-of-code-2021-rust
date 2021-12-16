@@ -177,34 +177,26 @@ fn get_value(index: usize, packets: &Vec<Packet>) -> u64 {
     // println!("{}", packets[index].typ);
 
     match packets[index].typ {
-        0 => { return values.iter().sum(); },
-        1 => { return values.iter().product(); },
-        2 => { return *values.iter().min().unwrap(); },
-        3 => { return *values.iter().max().unwrap(); }
+        0 => { values.iter().sum() },
+        1 => { values.iter().product() },
+        2 => { *values.iter().min().unwrap() },
+        3 => { *values.iter().max().unwrap() }
         4 => { packets[index].val }
         5 => {
-            if values[0] > values[1] {
-                return 1
-            }
+            if values[0] > values[1] { return 1 }
             0
         }
         6 => {
-            if values[0] < values[1] {
-                return 1
-            }
+            if values[0] < values[1] { return 1 }
             0
         }
         7 => {
-            if values[0] == values[1] {
-                return 1
-            }
+            if values[0] == values[1] { return 1 }
             0
         }
 
         _ => { panic!(); }
     }
-
-    // 0
 }
 
 pub fn part_b(input: &str) -> u64 {
